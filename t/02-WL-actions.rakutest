@@ -31,4 +31,39 @@ is translate('integrate Sin[x] over [0,1] using global adaptive, accuracy goal 8
    'NIntegrate[Sin[x], {x,0,1}, Method -> "GlobalAdaptive", AccuracyGoal -> 8, MaxRecursion -> 20]',
    'multiple integration options are translated in order';
 
+my @methods = (
+    'AdaptiveMonteCarlo'          => 'adaptive monte carlo',
+    'AdaptiveQuasiMonteCarlo'     => 'adaptive quasi monte carlo',
+    'DoubleExponential'           => 'double exponential',
+    'GlobalAdaptive'              => 'global adaptive',
+    'LocalAdaptive'               => 'local adaptive',
+    'MonteCarlo'                  => 'monte carlo',
+    'QuasiMonteCarlo'             => 'quasi monte carlo',
+    'EvenOddSubdivision'          => 'even odd subdivision',
+    'SymbolicPiecewiseSubdivision' => 'symbolic piecewise subdivision',
+    'UnitCubeRescaling'           => 'unit cube rescaling',
+    'CartesianRule'               => 'cartesian rule',
+    'ClenshawCurtisRule'          => 'clenshaw curtis rule',
+    'GaussKronrodRule'            => 'gauss kronrod rule',
+    'LobattoKronrodRule'          => 'lobatto kronrod rule',
+    'MonteCarloRule'              => 'monte carlo rule',
+    'MultidimensionalRule'        => 'multidimensional rule',
+    'NewtonCotesRule'             => 'newton cotes rule',
+    'TrapezoidalRule'             => 'trapezoidal rule',
+);
+
+for @methods -> $method {
+    my $expected = 'NIntegrate[1/x^2, {x,1,2}, Method -> "' ~ $method.key ~ '"]';
+    is translate('integrate 1/x^2 over [1,2] with ' ~ $method.key),
+       $expected,
+       $method.key ~ ' is accepted as a WL method name';
+    is translate('integrate 1/x^2 over [1,2] with ' ~ $method.value),
+       $expected,
+       $method.value ~ ' is accepted as a natural-language method name';
+}
+
+is translate('integrate 1/x^2 over [1,2] with adaptive_quasi-monte-carlo'),
+   'NIntegrate[1/x^2, {x,1,2}, Method -> "AdaptiveQuasiMonteCarlo"]',
+   'underscore- and hyphen-separated method names are accepted';
+
 done-testing;

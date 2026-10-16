@@ -75,9 +75,26 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
     # NIntegrate options
     method integration-options-spec($/) { make $<integration-option>>>.made.join(', '); }
     method integration-option($/) { make $/.values[0].made; }
-    method integration-method-option($/) { make $/.values[0].made; }
-    method local-adaptive-strategy($/) { make 'Method -> "LocalAdaptive"'; }
-    method global-adaptive-strategy($/) { make 'Method -> "GlobalAdaptive"'; }
+    method integration-method-option($/) { make 'Method -> "' ~ $<integration-method-name>.made ~ '"'; }
+    method integration-method-name($/) { make $/.values[0].made; }
+    method adaptive-monte-carlo($/) { make 'AdaptiveMonteCarlo'; }
+    method adaptive-quasi-monte-carlo($/) { make 'AdaptiveQuasiMonteCarlo'; }
+    method double-exponential($/) { make 'DoubleExponential'; }
+    method global-adaptive($/) { make 'GlobalAdaptive'; }
+    method local-adaptive($/) { make 'LocalAdaptive'; }
+    method monte-carlo($/) { make 'MonteCarlo'; }
+    method quasi-monte-carlo($/) { make 'QuasiMonteCarlo'; }
+    method even-odd-subdivision($/) { make 'EvenOddSubdivision'; }
+    method symbolic-piecewise-subdivision($/) { make 'SymbolicPiecewiseSubdivision'; }
+    method unit-cube-rescaling($/) { make 'UnitCubeRescaling'; }
+    method cartesian-rule($/) { make 'CartesianRule'; }
+    method clenshaw-curtis-rule($/) { make 'ClenshawCurtisRule'; }
+    method gauss-kronrod-rule($/) { make 'GaussKronrodRule'; }
+    method lobatto-kronrod-rule($/) { make 'LobattoKronrodRule'; }
+    method monte-carlo-rule($/) { make 'MonteCarloRule'; }
+    method multidimensional-rule($/) { make 'MultidimensionalRule'; }
+    method newton-cotes-rule($/) { make 'NewtonCotesRule'; }
+    method trapezoidal-rule($/) { make 'TrapezoidalRule'; }
     method precision-goal-option($/) { make 'PrecisionGoal -> ' ~ $<number-value>.made; }
     method accuracy-goal-option($/) { make 'AccuracyGoal -> ' ~ $<number-value>.made; }
     method max-recursion-option($/) { make 'MaxRecursion -> ' ~ $<integer-value>.made; }
