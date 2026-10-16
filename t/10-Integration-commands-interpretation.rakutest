@@ -1,0 +1,35 @@
+use v6.d;
+
+use DSL::English::IntegrationWorkflows;
+
+use Test;
+
+plan *;
+
+#-----------------------------------------------------------
+# Commands
+#-----------------------------------------------------------
+
+my @commands =
+        "compute the symbolic integral of Sin[x]*x^2 over 0 to 10",
+        "integrate symbolically Sin[x]*x^2 over a b",
+        "what is the integral of t^4+Log[t] for t in the interval 0 to a",
+        "compute the numerical integral of Sin[x] for x over 0 to 10",
+        "integrate numerically Sin[x^2]+5 in 0 to 10",
+        "integrate numerically 1/x+Sqrt[x] in the interval 4 and 10",
+        "integrate x^2+5",
+        "integrate Exp[-x] over R+",
+        "compute the integral of Log[x] of x from 0 to 10",
+        "compute the integral of Log[x] of x from 0 to 10 and plot it",
+        "integrate and plot Sin[x]*x^2 over 0 1"
+        ;
+
+#-----------------------------------------------------------
+# Parsing
+#-----------------------------------------------------------
+
+for @commands.kv -> $i, $cmd {
+    isa-ok ToIntegrationWorkflowCode($cmd), Str:D, "failed to parse {$i}-th command ⎡$cmd⎦",
+}
+
+done-testing;
