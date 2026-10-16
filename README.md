@@ -44,6 +44,35 @@ for @commands -> $cmd {
 # NIntegrate[exp(-(x^2 + y^2)), {x,-Infinity,Infinity}, {y,-Infinity,Infinity}, Method -> "UnitCubeRescaling"]
 ```
 
+---
+
+## Evaluation
+
+### Raku
+
+Generate numerical integration Raku code and evaluate it:
+
+```raku
+my $cmd= 'numerically integrate 1/sqrt(x) over the range [0,1] without singularity handling with up to 20 recursion levels';
+my $res = ToIntegrationWorkflowCode($cmd, 'Raku::Ecosystem');
+```
+```
+# nintegrate({1/sqrt($^x)}, ['x',0,1], singularity-handler => "none", max-recursion => 20)
+```
+
+```raku
+use Math::NIntegrate;
+use MONKEY-SEE-NO-EVAL;
+EVAL $res;
+```
+```
+#ERROR: Failed to converge to prescribed accuracy after 20 recursive bisections in near 5.93674981608222e-08.
+# 1.999989210746633
+```
+
+
+### Wolfram Language (WL)
+
 Using package's Command Line Interface (CLI) script check that valid, executable code is obtained by
 pipelining the interpretation result to [`wolframscript`](https://www.wolfram.com/wolframscript/):
 

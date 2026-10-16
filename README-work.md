@@ -38,6 +38,28 @@ for @commands -> $cmd {
 }
 ```
 
+---
+
+## Evaluation
+
+### Raku
+
+Generate numerical integration Raku code and evaluate it:
+
+```raku
+my $cmd= 'numerically integrate 1/sqrt(x) over the range [0,1] without singularity handling with up to 20 recursion levels';
+my $res = ToIntegrationWorkflowCode($cmd, 'Raku::Ecosystem');
+```
+
+```raku
+use Math::NIntegrate;
+use MONKEY-SEE-NO-EVAL;
+EVAL $res;
+```
+
+
+### Wolfram Language (WL)
+
 Using package's Command Line Interface (CLI) script check that valid, executable code is obtained by
 pipelining the interpretation result to [`wolframscript`](https://www.wolfram.com/wolframscript/):
 
