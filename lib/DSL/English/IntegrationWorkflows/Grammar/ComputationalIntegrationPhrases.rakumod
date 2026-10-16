@@ -73,14 +73,15 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     rule without-singularity-handling-option { 'without' 'singularity' 'handling' }
 
     # Words
-    token numerical-adjective {:i numerical | numeric }
-    token symbolic-adjective {:i symbolic }
-    token numerically-adverb {:i numerically }
-    token symbolically-adverb {:i symbolically }
-    token integrate-verb {:i integrate }
-    token integration-noun {:i integration }
+    token infinity-noun {:i infinity }
     token integral-noun {:i integral }
     token integrand-verb {:i integrand }
+    token integrate-verb {:i integrate }
+    token integration-noun {:i integration }
     token interval-noun {:i interval }
+    token numerical-adjective {:i numerical | numeric }
+    token numerically-adverb {:i numerically }
     token range-noun {:i range }
+    token symbolic-adjective {:i symbolic }
+    token symbolically-adverb {:i symbolically }
 }

@@ -30,7 +30,7 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     #regex variable-name { <.alpha> <.alnum>* }
     #regex number { <[+\-]>? \d+ [ <[.Ee]> <[+\-]>? \d+]? }
     rule range-named { 'R' | 'R+' | 'R-' }
-    regex infinity-spec {:i ['+' | '-']? ['Inf' | 'Infinity' | 'inf' | '∞'] }
+    regex infinity-spec {:i ['+' | '-']? ['Inf' | <infinity-noun> | 'inf' | '∞'] }
     regex range-boundary { <number-value> | <variable-name> | <infinity-spec> }
     regex range-interval { [<.from-preposition> \s+]? <range-boundary> [\s+ [<.to-preposition> | <.and-conjunction>]]? \s+ <range-boundary> }
     rule range-bracket-interval { '[' <range-boundary> ',' <range-boundary> ']' }
