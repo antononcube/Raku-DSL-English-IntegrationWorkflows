@@ -27,15 +27,15 @@ use DSL::English::IntegrationWorkflows::Actions::Russian::Standard;
 use DSL::English::IntegrationWorkflows::Actions::WL::System;
 
 my %targetToAction{Str} =
-    "Bulgarian"             => DSL::English::QuantileRegressionWorkflows::Actions::Bulgarian::Standard,
-    "English"               => DSL::English::QuantileRegressionWorkflows::Actions::English::Standard,
-    "Raku"                  => DSL::English::QuantileRegressionWorkflows::Actions::Raku::NIntegrate,
-    "Raku-NIntegrate"       => DSL::English::QuantileRegressionWorkflows::Actions::Raku::NIntegrate,
-    "Russian"               => DSL::English::QuantileRegressionWorkflows::Actions::Russian::Standard,
-    "Mathematica"           => DSL::English::QuantileRegressionWorkflows::Actions::WL::Standard,
-    "WL"                    => DSL::English::QuantileRegressionWorkflows::Actions::WL::Standard,
-    "WL-System"             => DSL::English::QuantileRegressionWorkflows::Actions::WL::Standard,
-    "WL-Standard"           => DSL::English::QuantileRegressionWorkflows::Actions::WL::Standard;
+    "Bulgarian"             => DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard,
+    "English"               => DSL::English::IntegrationWorkflows::Actions::English::Standard,
+    "Raku"                  => DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem,
+    "Raku-NIntegrate"       => DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem,
+    "Russian"               => DSL::English::IntegrationWorkflows::Actions::Russian::Standard,
+    "Mathematica"           => DSL::English::IntegrationWorkflows::Actions::WL::System,
+    "WL"                    => DSL::English::IntegrationWorkflows::Actions::WL::System,
+    "WL-System"             => DSL::English::IntegrationWorkflows::Actions::WL::System,
+    "WL-Standard"           => DSL::English::IntegrationWorkflows::Actions::WL::System;
 
 my %targetToAction2{Str} = %targetToAction.grep({ $_.key.contains('-') }).map({ $_.key.subst('-', '::') => $_.value }).Hash;
 %targetToAction = |%targetToAction , |%targetToAction2;

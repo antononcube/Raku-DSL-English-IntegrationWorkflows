@@ -1,0 +1,26 @@
+use v6.d;
+
+use Test;
+use DSL::English::IntegrationWorkflows::Grammar;
+use DSL::English::IntegrationWorkflows::Actions::WL::System;
+
+my $grammar = DSL::English::IntegrationWorkflows::Grammar;
+my $actions = DSL::English::IntegrationWorkflows::Actions::WL::System.new;
+
+sub translate(Str:D $command --> Str:D) {
+    $grammar.parse($command, :$actions).made
+}
+
+is translate('compute the symbolic integral of Sin[x]*x^2 over 0 to 10'),
+   'NIntegrate[Sin[x]&x^2, {x,0,10}]',
+   'bounded integration uses the inferred variable';
+
+is translate('compute the numerical integral of Sin[x] for x over 0 to 10'),
+   'NIntegrate[Sin[x], {x,0,10}]',
+   'an explicit integration variable is retained';
+
+is translate('integrate Exp[-x] over R+'),
+   'NIntegrate[Exp[-x], {x,0,Infinity}]',
+   'R+ becomes a non-negative unbounded interval';
+
+done-testing;
