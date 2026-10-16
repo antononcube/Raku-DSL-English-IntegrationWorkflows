@@ -1,12 +1,12 @@
 use v6.d;
 
 use DSL::English::IntegrationWorkflows::Grammar;
-use DSL::Shared::Actions::English::WL::PipelineCommand;
-use DSL::Shared::Actions::WL::PredicateSpecification;
+use DSL::Shared::Actions::English::PipelineCommand;
+use DSL::Shared::Actions::English::Standard::PipelineCommand;
 
 class DSL::English::IntegrationWorklfows::Actions::English::Standard
-        is DSL::Shared::Actions::English::WL::PipelineCommand
-        is DSL::Shared::Actions::WL::PredicateSpecification {
+        does DSL::Shared::Actions::English::Standard::PipelineCommand
+        is DSL::Shared::Actions::English::PipelineCommand {
 
     method TOP($/) { die 'Not implemented yet.' }
 

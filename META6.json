@@ -16,6 +16,8 @@
         "DSL::English::IntegrationWorkflows": "lib/DSL/English/IntegrationWorkflows.rakumod",
         "DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard": "lib/DSL/English/IntegrationWorkflows/Actions/Bulgarian/Standard.rakumod",
         "DSL::English::IntegrationWorkflows::Actions::English::Standard": "lib/DSL/English/IntegrationWorkflows/Actions/English/Standard.rakumod",
+        "DSL::English::IntegrationWorkflows::Actions::Russian::Standard": "lib/DSL/English/IntegrationWorkflows/Actions/Russian/Standard.rakumod",
+        "DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem": "lib/DSL/English/IntegrationWorkflows/Actions/Raku/Ecosystem.rakumod",
         "DSL::English::IntegrationWorkflows::Actions::WL::System": "lib/DSL/English/IntegrationWorkflows/Actions/WL/System.rakumod",
         "DSL::English::IntegrationWorkflows::Grammar": "lib/DSL/English/IntegrationWorkflows/Grammar.rakumod",
         "DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrases": "lib/DSL/English/IntegrationWorkflows/Grammar/ComputationalIntegrationPhrases.rakumod",
