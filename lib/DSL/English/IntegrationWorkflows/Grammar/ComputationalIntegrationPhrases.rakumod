@@ -88,6 +88,6 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     token numerically-adverb {:i numerically }
     token range-noun {:i range | ([\w]+) <?{ is-fuzzy-match($0.Str, 'range', 1) }> }
     token recursion-noun {:i recursion | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recursion', 1) }> }
-    token symbolic-adjective {:i symbolic | ([\w]+) <?{ $0.Str ne 'symbolically' && is-fuzzy-match($0.Str, 'symbolical', 2) }> }
+    token symbolic-adjective {:i symbolic | ([\w]+) <?{ $0.Str ne 'symbolically' && is-fuzzy-match($0.Str, 'symbolic', 2) }> }
     token symbolically-adverb {:i symbolically | ([\w]+) <?{ $0.Str ne 'symbolic' && is-fuzzy-match($0.Str, 'symbolically', 2) }> }
 }
