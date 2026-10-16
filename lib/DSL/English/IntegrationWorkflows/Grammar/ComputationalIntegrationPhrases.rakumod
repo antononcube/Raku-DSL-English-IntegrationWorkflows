@@ -71,4 +71,16 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     rule max-recursion-option { 'max' 'recursion' <integer-value> }
     rule recursion-levels-option { <.with-preposition>? 'up' <.to-preposition> <integer-value> 'recursion' 'levels' }
     rule without-singularity-handling-option { 'without' 'singularity' 'handling' }
+
+    # Words
+    token numerical-adjective {:i numerical | numeric }
+    token symbolic-adjective {:i symbolic }
+    token numerically-adverb {:i numerically }
+    token symbolically-adverb {:i symbolically }
+    token integrate-verb {:i integrate }
+    token integration-noun {:i integration }
+    token integral-noun {:i integral }
+    token integrand-verb {:i integrand }
+    token interval-noun {:i interval }
+    token range-noun {:i range }
 }

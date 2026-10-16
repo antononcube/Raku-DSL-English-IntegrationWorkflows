@@ -36,7 +36,7 @@ class DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard
     }
 
     method integration-kind($/ --> Str:D) {
-        my $request = $<integral-request> // $<integrate>;
+        my $request = $<integral-request> // $<integrate-directive>;
         my $text = $request.Str.lc;
         return ' символно' if $text.contains('symbolic');
         return ' числено' if $text.contains('numerical');

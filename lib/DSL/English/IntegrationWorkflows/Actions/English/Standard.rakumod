@@ -35,7 +35,7 @@ class DSL::English::IntegrationWorkflows::Actions::English::Standard
     }
 
     method integration-kind($/ --> Str:D) {
-        my $request = $<integral-request> // $<integrate>;
+        my $request = $<integral-request> // $<integrate-directive>;
         my $text = $request.Str.lc;
         return ' symbolic' if $text.contains('symbolic');
         return ' numerical' if $text.contains('numerical');
