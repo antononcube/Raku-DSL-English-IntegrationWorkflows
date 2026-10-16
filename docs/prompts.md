@@ -102,3 +102,22 @@ Tell me your plan to change the code so they will be parsed.
 ```text
 For WL translation from LaTeX function spec -- text delimited with $'s -- just use this code `ToExpression["\\sqrt{x y}", TeXForm]`.
 ```
+
+----
+
+## Raku `nintegrate` actions
+
+```text
+Raku has the package "Math::NIntegrate" which has the same design and algorithm as WL's `NIntegrate` 
+but for the option names and method names uses kebab-case. 
+For example, for this WL code: 
+`NIntegrate[1/x^2, {x,1,2}, Method -> "LocalAdaptive", PrecisionGoal -> 5]` 
+the corresponding Raku code is 
+`nintegrate[{1/$^x **2}, ['x',1,2], method => "local-adaptive", precision-goal => 5)`. 
+I want to leverage that similarity in Raku's actions. 
+Tell me your implementation plan for the Raku actions.
+```
+
+```text
+So, you do not think that DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem should inherit from DSL::English::IntegrationWorkflows::Actions::WL::System ?
+```
