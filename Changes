@@ -1,0 +1,8 @@
+Changes of the Raku package "DSL::English::IntegrationWorkflows".
+
+0.1.0 2026-10-16
+    - First version:
+        - Translation to Wolfram Language and Raku code
+        - Translation to Bulgarian, English, and Russian
+        - Fuzzy matching to handle misspellings
+        - CLI script
