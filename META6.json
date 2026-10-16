@@ -1,0 +1,37 @@
+{
+    "name": "DSL::English::IntegrationWorkflows",
+    "description": "Computational integration workflows building by natural language commands.",
+    "version": "0.1.0",
+    "authors": [
+        "Anton Antonov"
+    ],
+    "auth": "zef:antononcube",
+    "depends": [
+        "Clipboard:ver<0.1.1>",
+        "DSL::Shared:ver<0.1.4+>",
+        "LaTeX::Grammar:<0.0.5+>"
+    ],
+    "build-depends": [],
+    "provides": {
+        "DSL::English::IntegrationWorkflows": "lib/DSL/English/IntegrationWorkflows.rakumod",
+        "DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard": "lib/DSL/English/IntegrationWorkflows/Actions/Bulgarian/Standard.rakumod",
+        "DSL::English::IntegrationWorkflows::Actions::English::Standard": "lib/DSL/English/IntegrationWorkflows/Actions/English/Standard.rakumod",
+        "DSL::English::IntegrationWorkflows::Actions::WL::System": "lib/DSL/English/IntegrationWorkflows/Actions/WL/System.rakumod",
+        "DSL::English::IntegrationWorkflows::Grammar": "lib/DSL/English/IntegrationWorkflows/Grammar.rakumod",
+        "DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrases": "lib/DSL/English/IntegrationWorkflows/Grammar/ComputationalIntegrationPhrases.rakumod",
+        "DSL::English::IntegrationWorkflows::Grammarish": "lib/DSL/English/IntegrationWorkflows/Grammarish.rakumod"
+    },
+    "license": "GPL-3.0-or-later",
+    "tags": [
+        "integration",
+        "numerical integration",
+        "symbolic integration",
+        "Parser",
+        "Interpreter",
+        "Monad",
+        "Workflow",
+        "Pipeline"
+    ],
+    "api": "1",
+    "source-url": "https://github.com/antononcube/Raku-DSL-English-IntegrationWorkflows.git"
+}
