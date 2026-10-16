@@ -1,0 +1,26 @@
+use v6.d;
+
+use Test;
+use DSL::English::IntegrationWorkflows::Grammar;
+use DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem;
+
+my $grammar = DSL::English::IntegrationWorkflows::Grammar;
+my $actions = DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem.new;
+
+sub translate(Str:D $command --> Str:D) {
+    $grammar.parse($command, :$actions).made
+}
+
+is translate('integrate 1/x^2 over [1,2] with local adaptive and precision goal 5'),
+        'nintegrate({1/$^x **2}, [\'x\',1,2], method => "local-adaptive", precision-goal => 5)',
+        'a bounded integration is rendered for Math::NIntegrate';
+
+is translate('integrate numerically exp(-(x^2 + y^2)) over the domain [-Inf, Inf] x [-Inf, Inf] using unit cube rescaling'),
+        'nintegrate({exp(-($^x **2 + $^y **2))}, [\'x\',-Inf,Inf], [\'y\',-Inf,Inf], method => "unit-cube-rescaling")',
+        'a multidimensional domain produces a callable and one Raku range per variable';
+
+is translate('integrate 1/sqrt(x) over [0,1] without singularity handling with up to 20 recursion levels'),
+        'nintegrate({1/sqrt($^x)}, [\'x\',0,1], singularity-handler => "none", max-recursion => 20)',
+        'singularity and recursion controls use Math::NIntegrate option names';
+
+done-testing;
