@@ -133,6 +133,7 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
     method precision-goal-option($/) { make 'PrecisionGoal -> ' ~ $<number-value>.made; }
     method accuracy-goal-option($/) { make 'AccuracyGoal -> ' ~ $<number-value>.made; }
     method max-recursion-option($/) { make 'MaxRecursion -> ' ~ $<integer-value>.made; }
+    method min-recursion-option($/) { make 'MinRecursion -> ' ~ $<integer-value>.made; }
     method recursion-levels-option($/) { make 'MaxRecursion -> ' ~ $<integer-value>.made; }
     method without-singularity-handling-option($/) { make 'Method -> {"GlobalAdaptive", "SingularityHandler" -> None}'; }
 

@@ -29,7 +29,11 @@ is translate('integrate 1/x^2 over the range [1,2] with a local adaptive strateg
 
 is translate('integrate Sin[x] over [0,1] using global adaptive, accuracy goal 8, and max recursion 20'),
    'NIntegrate[Sin[x], {x,0,1}, Method -> "GlobalAdaptive", AccuracyGoal -> 8, MaxRecursion -> 20]',
-   'multiple integration options are translated in order';
+   'multiple integration options are translated in order 1';
+
+is translate('integrate Sin[x] over [0,1] using adaptive monte carlo, accuracy goal 2, min recursion 2 and max recursion 13'),
+        'NIntegrate[Sin[x], {x,0,1}, Method -> "AdaptiveMonteCarlo", AccuracyGoal -> 2, MinRecursion -> 2, MaxRecursion -> 13]',
+        'multiple integration options are translated in order 2';
 
 my @methods = (
     'AdaptiveMonteCarlo'          => 'adaptive monte carlo',

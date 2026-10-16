@@ -1,5 +1,7 @@
 use v6.d;
 
+use DSL::Shared::Utilities::FuzzyMatching;
+
 # Phrases for numerical-integration controls. The shared English pipeline role,
 # composed by the concrete grammar, supplies number values and prepositions.
 role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrases {
@@ -14,6 +16,7 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
         <precision-goal-option> |
         <accuracy-goal-option> |
         <max-recursion-option> |
+        <min-recursion-option> |
         <recursion-levels-option>
     }
     rule integration-option-separator { ',' <.and-conjunction>? | <.and-conjunction> }
@@ -40,7 +43,7 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
         <trapezoidal-rule>
     }
 
-    token strategy { :i 'strategy' }
+    token strategy { :i 'strategy'  | ([\w]+) <?{ is-fuzzy-match($0.Str, 'strategy', 2) }> }
     token method-name-separator { [ \h+ | '_' | '-' ]+ }
 
     # Integration strategies
@@ -66,14 +69,16 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     token multidimensional-rule { :i 'MultidimensionalRule' | 'MultiDimensionalRule' | 'multidimensional' <method-name-separator> 'rule' }
     token newton-cotes-rule { :i 'NewtonCotesRule' | 'newton' <method-name-separator> 'cotes' <method-name-separator> 'rule' }
     token trapezoidal-rule { :i 'TrapezoidalRule' | 'trapezoidal' <method-name-separator> 'rule' }
-    rule precision-goal-option { 'precision' 'goal' <number-value> }
-    rule accuracy-goal-option { 'accuracy' 'goal' <number-value> }
-    rule max-recursion-option { 'max' 'recursion' <integer-value> }
-    rule recursion-levels-option { <.with-preposition>? 'up' <.to-preposition> <integer-value> 'recursion' 'levels' }
+    rule precision-goal-option { 'precision' <goal-noun> <number-value> }
+    rule accuracy-goal-option { 'accuracy' <goal-noun> <number-value> }
+    rule max-recursion-option { <maximum> <recursion-noun> <integer-value> }
+    rule min-recursion-option { <minimum> <recursion-noun> <integer-value> }
+    rule recursion-levels-option { <.with-preposition>? 'up' <.to-preposition> <integer-value> <recursion-noun> 'levels' }
     rule without-singularity-handling-option { 'without' 'singularity' 'handling' }
 
     # Words
-    token infinity-noun {:i infinity }
+    token goal-noun {:i goal }
+    token infinity-noun {:i infinity | ([\w]+) <?{ is-fuzzy-match($0.Str, 'infinity', 2) }> }
     token integral-noun {:i integral }
     token integrand-verb {:i integrand }
     token integrate-verb {:i integrate }
@@ -81,7 +86,8 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     token interval-noun {:i interval }
     token numerical-adjective {:i numerical | numeric }
     token numerically-adverb {:i numerically }
-    token range-noun {:i range }
-    token symbolic-adjective {:i symbolic }
-    token symbolically-adverb {:i symbolically }
+    token range-noun {:i range | ([\w]+) <?{ is-fuzzy-match($0.Str, 'range', 1) }> }
+    token recursion-noun {:i recursion | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recursion', 1) }> }
+    token symbolic-adjective {:i symbolic | ([\w]+) <?{ $0.Str ne 'symbolically' && is-fuzzy-match($0.Str, 'symbolical', 2) }> }
+    token symbolically-adverb {:i symbolically | ([\w]+) <?{ $0.Str ne 'symbolic' && is-fuzzy-match($0.Str, 'symbolically', 2) }> }
 }

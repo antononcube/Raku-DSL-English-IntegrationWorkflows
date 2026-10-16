@@ -142,6 +142,7 @@ class DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem
     method precision-goal-option($/) { make 'precision-goal => ' ~ $<number-value>.made; }
     method accuracy-goal-option($/) { make 'accuracy-goal => ' ~ $<number-value>.made; }
     method max-recursion-option($/) { make 'max-recursion => ' ~ $<integer-value>.made; }
+    method min-recursion-option($/) { make 'min-recursion => ' ~ $<integer-value>.made; }
     method recursion-levels-option($/) { make 'max-recursion => ' ~ $<integer-value>.made; }
     method without-singularity-handling-option($/) { make 'singularity-handler => "none"'; }
 
