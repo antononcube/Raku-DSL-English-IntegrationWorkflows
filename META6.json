@@ -23,7 +23,7 @@
         "DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrases": "lib/DSL/English/IntegrationWorkflows/Grammar/ComputationalIntegrationPhrases.rakumod",
         "DSL::English::IntegrationWorkflows::Grammarish": "lib/DSL/English/IntegrationWorkflows/Grammarish.rakumod"
     },
-    "license": "GPL-3.0-or-later",
+    "license": "Artistic-2.0",
     "tags": [
         "integration",
         "numerical integration",
