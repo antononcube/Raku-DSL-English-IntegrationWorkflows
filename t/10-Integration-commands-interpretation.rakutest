@@ -28,8 +28,15 @@ my @commands =
 # Parsing
 #-----------------------------------------------------------
 
+# Default WL actions
 for @commands.kv -> $i, $cmd {
-    isa-ok ToIntegrationWorkflowCode($cmd), Str:D, "failed to parse {$i}-th command ⎡$cmd⎦",
+    isa-ok ToIntegrationWorkflowCode($cmd), Str:D, "failed to interpret to WL {$i}-th command ⎡$cmd⎦",
+}
+
+# Raku actions
+for @commands[3..4].kv -> $i, $cmd {
+        #say ToIntegrationWorkflowCode($cmd, "Raku::Ecosystem");
+        isa-ok ToIntegrationWorkflowCode($cmd, "Raku::Ecosystem"), Str:D, "failed to interpret to Raku {$i}-th command ⎡$cmd⎦",
 }
 
 done-testing;
