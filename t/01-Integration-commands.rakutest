@@ -32,7 +32,7 @@ my @commands =
 #-----------------------------------------------------------
 
 for @commands.kv -> $i, $cmd {
-    ok $g.parse($cmd), "failed to parse {$i}-th command $cmd",
+    ok $g.parse($cmd), "failed to parse {$i}-th command ⎡$cmd⎦",
 }
 
 done-testing;
