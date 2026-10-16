@@ -15,26 +15,27 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     }
 
     # Integration command
-    rule integration-command { <COMMAND1> | <COMMAND2> }
+    rule integration-command { <command-integrate-and-plot> | <command-integrate-short> }
 
     # First grammar derived from 2014 blog and presentation DSL / Functional Parsers examples
-    rule REQUEST-PREAMBLE { 'compute' | 'what' 'is' }
-    rule COMPUTE { <REQUEST-PREAMBLE> 'the'? }
-    rule INTEGRAL-TYPE { ['numerical' | 'symbolic']? 'integral' }
-    rule INTEGRATE { ['symbolically' | 'numerically']? 'integrate' | 'integrate' ['numerically' | 'symbolically'] }
-    rule FUNCTION { \S+ }
-    regex VAR { <.alpha> <.alnum>* }
-    rule RANGE-NAMED { 'R' | 'R+' | 'R-' }
+    rule request-preamble { 'compute' | 'what' 'is' }
+    rule compute { <request-preamble> 'the'? }
+    rule integral-type { ['numerical' | 'symbolic']? 'integral' }
+    rule integrate { ['symbolically' | 'numerically']? 'integrate' | 'integrate' ['numerically' | 'symbolically'] }
+    rule function-spec { \S+ }
+    # Defined in DSL::Shared
+    #regex variable-name { <.alpha> <.alnum>* }
+    rule range-NAMED { 'R' | 'R+' | 'R-' }
     regex INFINITY {:i ['+' | '-']? ['Inf' | 'Infinity' | 'inf' | '∞'] }
     regex number { <[+\-]>? \d+ [ <[.Ee]> <[+\-]>? \d+]? }
-    regex RANGE-BOUNDARY { <number> | <VAR> | <INFINITY> }
-    regex RANGE-INTERVAL { ['from' \s+]? <RANGE-BOUNDARY> [\s+ ['to' | 'and']]? \s+ <RANGE-BOUNDARY> }
-    regex RANGE { [['in' | 'over']? [\s+ 'the']? [\s+ 'interval']?] \s+ [<RANGE-INTERVAL> | <RANGE-NAMED>] }
-    rule VAR-RANGE-SPEC { ['for' | 'of'] <VAR> <RANGE> }
-    rule INTEGRAL-REQUEST { <.COMPUTE> <INTEGRAL-TYPE> 'of' }
-    rule PLOT { 'plot' 'it'? }
-    rule COMMAND1 { [<INTEGRAL-REQUEST> | <INTEGRATE> ['and' <PLOT>]?] <FUNCTION> [<VAR-RANGE-SPEC> | <RANGE>] ['and' <PLOT>]? }
-    rule COMMAND2 { [<INTEGRAL-REQUEST> | <INTEGRATE>] <FUNCTION> }
+    regex range-boundary { <number> | <variable-name> | <INFINITY> }
+    regex range-interval { ['from' \s+]? <range-boundary> [\s+ ['to' | 'and']]? \s+ <range-boundary> }
+    regex range { [['in' | 'over']? [\s+ 'the']? [\s+ 'interval']?] \s+ [<range-interval> | <range-NAMED>] }
+    rule variable-range-spec { ['for' | 'of'] <variable-name> <range> }
+    rule integral-request { <.compute> <integral-type> 'of' }
+    rule plot { 'plot' 'it'? }
+    rule command-integrate-and-plot { [<integral-request> | <integrate> ['and' <plot>]?] <function-spec> [<variable-range-spec> | <range>] ['and' <plot>]? }
+    rule command-integrate-short { [<integral-request> | <integrate>] <function-spec> }
 
     # Monitor command
 
