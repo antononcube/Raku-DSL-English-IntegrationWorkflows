@@ -1,0 +1,26 @@
+use v6.d;
+
+use Test;
+use DSL::English::IntegrationWorkflows::Grammar;
+use DSL::English::IntegrationWorkflows::Actions::English::Standard;
+
+my $grammar = DSL::English::IntegrationWorkflows::Grammar;
+my $actions = DSL::English::IntegrationWorkflows::Actions::English::Standard.new;
+
+sub translate(Str:D $command --> Str:D) {
+    $grammar.parse($command, :$actions).made
+}
+
+is translate('compute the symbolic integral of Sin[x]*x^2 over 0 to 10'),
+   'compute the symbolic integral of the function Sin[x]*x^2 over the interval [0, 10]',
+   'a symbolic bounded integral is normalized to English';
+
+is translate('compute the numerical integral of Sin[x] for x over 0 to 10'),
+   'compute the numerical integral of the function Sin[x] over the interval [0, 10]',
+   'a numerical integral retains its integration mode';
+
+is translate('integrate Exp[-x] over R+'),
+   'compute the integral of the function Exp[-x] over the interval [0, Infinity)',
+   'R+ is normalized as a non-negative unbounded interval';
+
+done-testing;

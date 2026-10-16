@@ -1,0 +1,26 @@
+use v6.d;
+
+use Test;
+use DSL::English::IntegrationWorkflows::Grammar;
+use DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard;
+
+my $grammar = DSL::English::IntegrationWorkflows::Grammar;
+my $actions = DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard.new;
+
+sub translate(Str:D $command --> Str:D) {
+    $grammar.parse($command, :$actions).made
+}
+
+is translate('compute the symbolic integral of Sin[x]*x^2 over 0 to 10'),
+   'изчисли символно интегралът на функцията Sin[x]*x^2 в интервала [0, 10]',
+   'a symbolic bounded integral is translated to Bulgarian';
+
+is translate('compute the numerical integral of Sin[x] for x over 0 to 10'),
+   'изчисли числено интегралът на функцията Sin[x] в интервала [0, 10]',
+   'a numerical integral retains its integration mode';
+
+is translate('integrate Exp[-x] over R+'),
+   'изчисли интегралът на функцията Exp[-x] в интервала [0, ∞)',
+   'R+ is rendered as a non-negative unbounded interval';
+
+done-testing;
