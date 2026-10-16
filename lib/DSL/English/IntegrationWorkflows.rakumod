@@ -8,9 +8,9 @@ interpretation of English natural speech commands that specify symbolic or numer
 =head1 Synopsis
 
     use DSL::English::IntegrationWorkflows;
-    my $cmd = "compute the integral of x^2 over 0.1 amd 0.9";
+    my $cmd = "compute the integral of x^2 over 0.1 and 0.9";
     my $rcode = ToIntegrationWorkflowCode($cmd);
-    my $pcode = ToIntegrationWorkflowCode($cmd, target => "Raku::NIntegrate");
+    my $pcode = ToIntegrationWorkflowCode($cmd, target => "Raku::Ecosystem");
 
 =end pod
 
