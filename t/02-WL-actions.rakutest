@@ -66,4 +66,16 @@ is translate('integrate 1/x^2 over [1,2] with adaptive_quasi-monte-carlo'),
    'NIntegrate[1/x^2, {x,1,2}, Method -> "AdaptiveQuasiMonteCarlo"]',
    'underscore- and hyphen-separated method names are accepted';
 
+is translate('numerically integrate $\frac{1}{sqrt{x}}$ over the range [0,1] without singularity handling with up to 20 recursion levels'),
+   'NIntegrate[ToExpression["\\\\frac{1}{sqrt{x}}", TeXForm], {x,0,1}, Method -> {"GlobalAdaptive", "SingularityHandler" -> None}, MaxRecursion -> 20]',
+   'LaTeX expressions and singularity/recursion controls are translated';
+
+is translate('do symbolic integration of $\frac{1}{sqrt{x}}$ over the range [0,1]'),
+   'NIntegrate[ToExpression["\\\\frac{1}{sqrt{x}}", TeXForm], {x,0,1}]',
+   'do symbolic integration accepts a LaTeX function specification';
+
+is translate('integrate numerically exp(-(x^2 + y^2)) over the domain [-Inf, Inf] x [-Inf, Inf] using unit cube rescaling'),
+   'NIntegrate[exp(-(x^2 + y^2)), {x,-Infinity,Infinity}, {y,-Infinity,Infinity}, Method -> "UnitCubeRescaling"]',
+   'a two-dimensional domain produces one iterator per inferred variable';
+
 done-testing;

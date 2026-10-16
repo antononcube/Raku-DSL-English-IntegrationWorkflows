@@ -4,16 +4,17 @@ use v6.d;
 # composed by the concrete grammar, supplies number values and prepositions.
 role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrases {
     rule integration-options-spec {
-        [ <.with-preposition> | <.using-preposition> ]
-        <.a-determiner>?
-        <integration-option>+ % <integration-option-separator>
+        [ <.with-preposition> | <.using-preposition> ] <.a-determiner>? <integration-option>+ % <integration-option-separator> |
+        <without-singularity-handling-option> |
+        <recursion-levels-option>
     }
 
     rule integration-option {
         <integration-method-option> |
         <precision-goal-option> |
         <accuracy-goal-option> |
-        <max-recursion-option>
+        <max-recursion-option> |
+        <recursion-levels-option>
     }
     rule integration-option-separator { ',' <.and-conjunction>? | <.and-conjunction> }
 
@@ -68,4 +69,6 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     rule precision-goal-option { 'precision' 'goal' <number-value> }
     rule accuracy-goal-option { 'accuracy' 'goal' <number-value> }
     rule max-recursion-option { 'max' 'recursion' <integer-value> }
+    rule recursion-levels-option { <.with-preposition>? 'up' <.to-preposition> <integer-value> 'recursion' 'levels' }
+    rule without-singularity-handling-option { 'without' 'singularity' 'handling' }
 }
