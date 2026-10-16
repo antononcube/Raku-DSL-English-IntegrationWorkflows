@@ -18,23 +18,23 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     rule integration-command { <command-integrate-and-plot> | <command-integrate-short> }
 
     # First grammar derived from 2014 blog and presentation DSL / Functional Parsers examples
-    rule request-preamble { 'compute' | 'what' 'is' }
-    rule compute { <request-preamble> 'the'? }
+    rule request-preamble { <compute-directive> | <what-pronoun> <is-verb> }
+    rule compute { <request-preamble> <the-determiner>? }
     rule integral-type { ['numerical' | 'symbolic']? 'integral' }
     rule integrate { ['symbolically' | 'numerically']? 'integrate' | 'integrate' ['numerically' | 'symbolically'] }
     rule function-spec { \S+ }
     # Defined in DSL::Shared
     #regex variable-name { <.alpha> <.alnum>* }
-    rule range-NAMED { 'R' | 'R+' | 'R-' }
-    regex INFINITY {:i ['+' | '-']? ['Inf' | 'Infinity' | 'inf' | '∞'] }
-    regex number { <[+\-]>? \d+ [ <[.Ee]> <[+\-]>? \d+]? }
-    regex range-boundary { <number> | <variable-name> | <INFINITY> }
-    regex range-interval { ['from' \s+]? <range-boundary> [\s+ ['to' | 'and']]? \s+ <range-boundary> }
-    regex range { [['in' | 'over']? [\s+ 'the']? [\s+ 'interval']?] \s+ [<range-interval> | <range-NAMED>] }
-    rule variable-range-spec { ['for' | 'of'] <variable-name> <range> }
-    rule integral-request { <.compute> <integral-type> 'of' }
-    rule plot { 'plot' 'it'? }
-    rule command-integrate-and-plot { [<integral-request> | <integrate> ['and' <plot>]?] <function-spec> [<variable-range-spec> | <range>] ['and' <plot>]? }
+    #regex number { <[+\-]>? \d+ [ <[.Ee]> <[+\-]>? \d+]? }
+    rule range-named { 'R' | 'R+' | 'R-' }
+    regex infinity-spec {:i ['+' | '-']? ['Inf' | 'Infinity' | 'inf' | '∞'] }
+    regex range-boundary { <number-value> | <variable-name> | <infinity-spec> }
+    regex range-interval { [<.from-preposition> \s+]? <range-boundary> [\s+ [<.to-preposition> | <.and-conjunction>]]? \s+ <range-boundary> }
+    regex range { [[<.in-preposition> | <.over-preposition>]? [\s+ <.the-determiner>]? [\s+ 'interval']?] \s+ [<range-interval> | <range-named>] }
+    rule variable-range-spec { [<.for-preposition> | <.of-preposition>] <variable-name> <range> }
+    rule integral-request { <.compute> <integral-type> <.of-preposition> }
+    rule plot { <.plot-noun> <.it-pronoun>? }
+    rule command-integrate-and-plot { [<integral-request> | <integrate> [<.and-conjunction> <plot>]?] <function-spec> [<variable-range-spec> | <range>] [ <.and-conjunction> <.plot-noun>]? }
     rule command-integrate-short { [<integral-request> | <integrate>] <function-spec> }
 
     # Monitor command
