@@ -30,7 +30,7 @@ my %targetToAction{Str} =
     "Bulgarian"             => DSL::English::IntegrationWorkflows::Actions::Bulgarian::Standard,
     "English"               => DSL::English::IntegrationWorkflows::Actions::English::Standard,
     "Raku"                  => DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem,
-    "Raku-NIntegrate"       => DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem,
+    "Raku-Ecosystem"        => DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem,
     "Russian"               => DSL::English::IntegrationWorkflows::Actions::Russian::Standard,
     "Mathematica"           => DSL::English::IntegrationWorkflows::Actions::WL::System,
     "WL"                    => DSL::English::IntegrationWorkflows::Actions::WL::System,
@@ -45,11 +45,11 @@ my Str %targetToSeparator{Str} =
     "English"               => "\n",
     "Mathematica"           => ";\n",
     "Python"                => "\n",
-    "Python-NIntegrate"     => "\n",
+    "Python-Ecosystem"      => "\n",
     "R"                     => "\n",
-    "R-NIntegrate"          => "\n",
+    "R-Ecosystem"           => "\n",
     "Raku"                  => ";\n",
-    "Raku-NIntegrate"       => ";\n",
+    "Raku-Ecosystem"        => ";\n",
     "Russian"               => "\n",
     "WL"                    => ";\n",
     "WL-System"             => ";\n",
@@ -61,11 +61,11 @@ my Str %targetToSeparator2{Str} = %targetToSeparator.grep({ $_.key.contains('-')
 #-----------------------------------------------------------
 proto ToIntegrationWorkflowCode(Str $command, | ) is export {*}
 
-multi ToIntegrationWorkflowCode(Str $command, Str :$target = 'R-QRMon', *%args ) {
+multi ToIntegrationWorkflowCode(Str $command, Str :$target = 'WL-System', *%args ) {
     return ToIntegrationWorkflowCode($command, $target, |%args);
 }
 
-multi ToIntegrationWorkflowCode( Str $command, Str $target = 'R-QRMon', *%args ) {
+multi ToIntegrationWorkflowCode( Str $command, Str $target = 'WL-System', *%args ) {
 
     my $lang = %args<language>:exists ?? %args<language> !! 'English';
     $lang = $lang.wordcase;
