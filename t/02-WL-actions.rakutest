@@ -23,4 +23,12 @@ is translate('integrate Exp[-x] over R+'),
    'NIntegrate[Exp[-x], {x,0,Infinity}]',
    'R+ becomes a non-negative unbounded interval';
 
+is translate('integrate 1/x^2 over the range [1,2] with a local adaptive strategy and precision goal 5'),
+   'NIntegrate[1/x^2, {x,1,2}, Method -> "LocalAdaptive", PrecisionGoal -> 5]',
+   'a bracket range and NIntegrate options are translated';
+
+is translate('integrate Sin[x] over [0,1] using global adaptive, accuracy goal 8, and max recursion 20'),
+   'NIntegrate[Sin[x], {x,0,1}, Method -> "GlobalAdaptive", AccuracyGoal -> 8, MaxRecursion -> 20]',
+   'multiple integration options are translated in order';
+
 done-testing;
