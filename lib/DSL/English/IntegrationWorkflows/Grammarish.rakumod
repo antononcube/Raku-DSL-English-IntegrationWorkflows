@@ -30,11 +30,11 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     regex infinity-spec {:i ['+' | '-']? ['Inf' | 'Infinity' | 'inf' | '∞'] }
     regex range-boundary { <number-value> | <variable-name> | <infinity-spec> }
     regex range-interval { [<.from-preposition> \s+]? <range-boundary> [\s+ [<.to-preposition> | <.and-conjunction>]]? \s+ <range-boundary> }
-    regex range { [[<.in-preposition> | <.over-preposition>]? [\s+ <.the-determiner>]? [\s+ 'interval']?] \s+ [<range-interval> | <range-named>] }
+    regex range { [[<.in-preposition> | <.over-preposition>]? [\s+ <.the-determiner>]? [\s+ 'interval']? \s+]? [<range-interval> | <range-named>] }
     rule variable-range-spec { [<.for-preposition> | <.of-preposition>] <variable-name> <range> }
     rule integral-request { <.compute> <integral-type> <.of-preposition> }
-    rule plot { <.plot-noun> <.it-pronoun>? }
-    rule command-integrate-and-plot { [<integral-request> | <integrate> [<.and-conjunction> <plot>]?] <function-spec> [<variable-range-spec> | <range>] [ <.and-conjunction> <.plot-noun>]? }
+    rule plot-phrase { <.plot-noun> <.it-pronoun>? }
+    rule command-integrate-and-plot { [<integral-request> | <integrate> [<.and-conjunction> <plot-phrase>]?] <function-spec> [<variable-range-spec> | <range>] [ <.and-conjunction> <plot-phrase>]? }
     rule command-integrate-short { [<integral-request> | <integrate>] <function-spec> }
 
     # Monitor command
