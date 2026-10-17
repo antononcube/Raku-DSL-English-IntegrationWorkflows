@@ -1,5 +1,7 @@
 # Dev Prompts for "DSL::English::IntegrationWorkflows" 
 
+Except indicated otherwise all prompts were given to OpenAI's Codex using GPT-5.6-Terra with medium reasoning.
+
 ---
 
 ## Wolfram Language `NIntegrate` actions
@@ -25,6 +27,12 @@ should produce the Bulgarian statement "изчисли символно инте
 
 ```text
 Similarly, normalize the given integration commands to English in the English actions.
+```
+
+In a separate session:
+
+```text
+Implement the translation actions in  "./lib/DSL/English/IntegrationWorkflows/Actions/Russian/Standard.rakumod".
 ```
 
 ---
@@ -138,3 +146,27 @@ token adaptive-monte-carlo { :i 'AdaptiveMonteCarlo' | 'adaptive' <method-name-s
 
 Do the rest of the methods.
 ````
+
+This needed a few manual (human mind) corrections -- my instructions wee not completely correct/ working. 
+This code should have been used in the instructions:
+
+```raku
+# Renamed <method-name-separator> to <msep>
+token msep { [ \h+ | '_' | '-' ]+ }
+token adaptive-monte-carlo { :i 'AdaptiveMonteCarlo' | 'adaptive' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivemontecarlo', 3) }> }
+```
+
+Also, this broke certain tests with MonteCarloRule -- it got confused with MonteCarlo. 
+Hence, fuzzy matching for MonteCarlo was removed. To fix that, probably, refactoring to using regexes is needed. 
+For now the workaround is to place <monte-carlo-rule> _before_ <monte-carlo> in <integration-method-name>.
+(Might not be a "sufficient" fix and `||` has to be used in some way.)
+
+----
+
+## Respecting symbolic integration requests
+
+```text
+If the command indicates symbolic integration the WL actions should Integrate instead of NIntegrate. 
+Tell me first what you going to do -- do not implement yet.
+Also, I use the token <computation-type> but <integration-mode> is a better name.
+```
