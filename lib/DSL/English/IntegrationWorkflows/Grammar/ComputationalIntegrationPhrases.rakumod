@@ -52,7 +52,7 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     token double-exponential { :i 'DoubleExponential' | 'double' <msep> 'exponential' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'doubleexponential', 3) }> }
     token global-adaptive { :i 'GlobalAdaptive' | 'global' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'globaladaptive', 3) }> }
     token local-adaptive { :i 'LocalAdaptive' | 'local' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'localadaptive', 3) }> }
-    token monte-carlo { :i 'MonteCarlo' | 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlo', 3) }> }
+    token monte-carlo { :i 'MonteCarlo' | 'monte' <msep> 'carlo' }
     token quasi-monte-carlo { :i 'QuasiMonteCarlo' | 'quasi' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'quasimontecarlo', 3) }> }
 
     # Integration preprocessors
