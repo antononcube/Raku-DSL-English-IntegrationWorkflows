@@ -1,5 +1,9 @@
 Changes of the Raku package "DSL::English::IntegrationWorkflows".
 
+0.1.1 2026-10-17
+    - Minor bug fixes and/or phrase parsing extensions
+    - Additional documentation (examples script and TODO list)
+
 0.1.0 2026-10-16
     - First version:
         - Translation to Wolfram Language and Raku code
