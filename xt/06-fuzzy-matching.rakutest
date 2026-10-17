@@ -1,0 +1,30 @@
+use v6.d;
+
+use DSL::English::IntegrationWorkflows::Grammar;
+
+use Test;
+
+plan *;
+
+# Shortcut
+my $g = DSL::English::IntegrationWorkflows::Grammar;
+
+#-----------------------------------------------------------
+# Commands
+#-----------------------------------------------------------
+
+my @commands =
+        'integrate numerically exp(-(x^2 + y^2)) over the domain [-Inf, Inf] x [-Inf, Inf] using unite cube rescaling',
+        "integarate symbolicaly Sin[x]*x^2 over a b",
+        "compute the numerical integral of Sin[x] for x over 0 to 10 with global adaptiva",
+        ;
+
+#-----------------------------------------------------------
+# Parsing
+#-----------------------------------------------------------
+
+for @commands.kv -> $i, $cmd {
+    ok $g.parse($cmd), "failed to parse {$i}-th command ⎡$cmd⎦",
+}
+
+done-testing;
