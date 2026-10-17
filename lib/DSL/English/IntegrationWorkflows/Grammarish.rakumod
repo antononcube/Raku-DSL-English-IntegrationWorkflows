@@ -36,7 +36,7 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     rule range-bracket-interval { '[' <range-boundary> ',' <range-boundary> ']' }
     regex range { [[<.in-preposition> | <.over-preposition>]? [\s+ <.the-determiner>]? [\s+ [<.interval-noun> | <.range-noun>]]? \s+]? [<range-bracket-interval> | <range-interval> | <range-named>] }
     token domain-product { 'x' | '×' }
-    rule domain-range-spec { [<.in-preposition> | <.over-preposition>] <.the-determiner>? <.domain-noun> <range-bracket-interval>+ % <domain-product> }
+    rule domain-range-spec { [<.in-preposition> | <.over-preposition>] <.the-determiner>? <.domain-noun>? <range-bracket-interval>+ % <domain-product> }
     rule variable-range-spec { [<.for-preposition> | <.of-preposition>] <variable-name> <range> }
     rule integral-request { [<.compute> | <.do-verb>] <integral-type> <.of-preposition> }
     rule plot-phrase { <.plot-noun> <.it-pronoun>? }
