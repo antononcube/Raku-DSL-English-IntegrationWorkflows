@@ -1,7 +1,7 @@
 {
     "name": "DSL::English::IntegrationWorkflows",
     "description": "Computational integration workflows building by natural language commands.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "authors": [
         "Anton Antonov"
     ],
