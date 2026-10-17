@@ -57,13 +57,11 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
         my $options = $<integration-options-spec>
             ?? $<integration-options-spec>>>.made.join(', ')
             !! '';
-        my $integral = self.integration-code($function, @iterators, $options,
-            :head(self.integration-head($/)));
+        my $integral = self.integration-code($function, @iterators, $options, :head(self.integration-head($/)));
 
         if $<plot-phrase> {
             my $iterator = @iterators[0];
-            make '{' ~ $integral ~ ', Plot[' ~ self.wl-function($function)
-                ~ ', ' ~ $iterator ~ ']}';
+            make '{' ~ $integral ~ ', Plot[' ~ self.wl-function($function) ~ ', ' ~ $iterator ~ ']}';
         } else {
             make $integral;
         }
