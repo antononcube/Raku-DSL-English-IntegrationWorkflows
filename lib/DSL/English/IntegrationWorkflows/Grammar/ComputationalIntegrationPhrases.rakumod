@@ -21,7 +21,7 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     }
     rule integration-option-separator { ',' <.and-conjunction>? | <.and-conjunction> }
 
-    rule integration-method-option { <integration-method-name> <.strategy>? }
+    rule integration-method-option { [<.the-determiner> | <.a-determiner> | <.some-determiner>]? <integration-method-name> <.strategy>? }
     rule integration-method-name {
         <adaptive-monte-carlo> |
         <adaptive-quasi-monte-carlo> |
