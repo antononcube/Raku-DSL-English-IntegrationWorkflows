@@ -131,6 +131,30 @@ For example, the general package structure, its "top-level" subs, and fuzzy matc
 
 ----
 
+## TODO
+
+- [ ] Symbolic integration for Raku
+  - Via the package "CortexJS"
+- [ ] Proper interpretation of LaTeX integrands for Raku
+  - Via the package "LaTeX::Grammar"
+    - If the user has it installed
+  - This should be parsed:
+    - `integrate $\sin{x^2}\log{x/5}$ in [0,100] using the local adaptive strategy`
+- [ ] Proper interpreting of Mathematica syntax integrands for Raku
+    - Via the package "Mathematica::Grammar"
+        - If the user has it installed
+- [ ] Parsing of functional boundaries
+- [ ] Comprehensive method option parsing.
+  - Currently, the parsed method option spec is "shallow" -- only a method name can be used
+  - See the grammar in "Math::NIntegrate"
+  - This should be parsed:
+    - `integrate Sin[x^2] in [0,100] using the local adaptive strategy with Clenshaw-Curtis rule with 7 points`
+- [ ] Handling syntax of ranges and integrand mistakes
+  - For example, having two right brackets:
+    - `integrate $\sin{x^2}\log{x/5}$ in [0,100]]`,
+
+----
+
 ## References
 
 ### Articles, blog posts
