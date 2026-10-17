@@ -121,3 +121,20 @@ Tell me your implementation plan for the Raku actions.
 ```text
 So, you do not think that DSL::English::IntegrationWorkflows::Actions::Raku::Ecosystem should inherit from DSL::English::IntegrationWorkflows::Actions::WL::System ?
 ```
+
+----
+
+## Fuzzy matching
+
+At this point I implemented fuzzy matching for a half-dozen of tokens in 
+["ComputationalIntegrationPhrases.rakumod"](../lib/DSL/English/IntegrationWorkflows/Grammar/ComputationalIntegrationPhrases.rakumod).
+
+````text
+I want to have a fuzzy matching for the method-names. Here is an example:
+
+```raku
+token adaptive-monte-carlo { :i 'AdaptiveMonteCarlo' | 'adaptive' <method-name-separator> 'monte' <method-name-separator> 'carlo' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivemontecarlo', 3) }> }
+```
+
+Do the rest of the methods.
+````
