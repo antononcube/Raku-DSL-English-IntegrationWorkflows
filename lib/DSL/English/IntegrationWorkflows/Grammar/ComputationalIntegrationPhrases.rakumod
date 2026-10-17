@@ -28,6 +28,7 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
         <double-exponential> |
         <global-adaptive> |
         <local-adaptive> |
+        <monte-carlo-rule> |
         <monte-carlo> |
         <quasi-monte-carlo> |
         <even-odd-subdivision> |
@@ -37,7 +38,6 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
         <clenshaw-curtis-rule> |
         <gauss-kronrod-rule> |
         <lobatto-kronrod-rule> |
-        <monte-carlo-rule> |
         <multidimensional-rule> |
         <newton-cotes-rule> |
         <trapezoidal-rule>
@@ -52,7 +52,8 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     token double-exponential { :i 'DoubleExponential' | 'double' <msep> 'exponential' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'doubleexponential', 3) }> }
     token global-adaptive { :i 'GlobalAdaptive' | 'global' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'globaladaptive', 3) }> }
     token local-adaptive { :i 'LocalAdaptive' | 'local' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'localadaptive', 3) }> }
-    token monte-carlo { :i 'MonteCarlo' | 'monte' <msep> 'carlo' }
+    # This breaks MonteCarloRule test in "02-WL-actions.rakutest" if <monte-carlo-rule> is placed after <monte-carlo> in <integration-method-name>
+    token monte-carlo { :i 'MonteCarlo' | 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlo', 1) }> }
     token quasi-monte-carlo { :i 'QuasiMonteCarlo' | 'quasi' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'quasimontecarlo', 3) }> }
 
     # Integration preprocessors
