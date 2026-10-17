@@ -21,8 +21,8 @@ role DSL::English::IntegrationWorkflows::Grammarish {
     rule request-preamble { <compute-directive> | <what-pronoun> <is-verb> }
     rule compute { <request-preamble> <the-determiner>? }
     rule integral-type { [<numerical-adjective> | <symbolic-adjective>]? [<integral-noun> | <integration-noun>] }
-    rule computation-type { <symbolically-adverb> | <numerically-adverb> }
-    rule integrate-directive { <computation-type>? <integrate-verb> | <integrate-verb> <computation-type> }
+    rule integration-mode { <symbolically-adverb> | <numerically-adverb> }
+    rule integrate-directive { <integration-mode>? <integrate-verb> | <integrate-verb> <integration-mode> }
     token latex-function-spec { '$' <-[$]>* '$' }
     regex plain-function-spec { .+? <?before \s+ ['over' | 'in' | 'for' | 'of'] > }
     rule function-spec { <latex-function-spec> || <plain-function-spec> || \S+ }

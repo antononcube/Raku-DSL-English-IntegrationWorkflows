@@ -20,8 +20,13 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
 
     method inferred-variable(Str:D $function --> Str:D) { self.inferred-variables($function)[0] }
 
-    method integration-code(Str:D $function, @iterators, Str:D $options = '' --> Str:D) {
-        'NIntegrate[' ~ self.wl-function($function) ~ ', ' ~ @iterators.join(', ')
+    method integration-head($/ --> Str:D) {
+        my $request = $<integral-request> // $<integrate-directive>;
+        $request.Str.lc.contains('symbolic') ?? 'Integrate' !! 'NIntegrate'
+    }
+
+    method integration-code(Str:D $function, @iterators, Str:D $options = '', Str:D :$head = 'NIntegrate' --> Str:D) {
+        $head ~ '[' ~ self.wl-function($function) ~ ', ' ~ @iterators.join(', ')
             ~ ($options.chars ?? ', ' ~ $options !! '') ~ ']'
     }
 
@@ -52,7 +57,8 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
         my $options = $<integration-options-spec>
             ?? $<integration-options-spec>>>.made.join(', ')
             !! '';
-        my $integral = self.integration-code($function, @iterators, $options);
+        my $integral = self.integration-code($function, @iterators, $options,
+            :head(self.integration-head($/)));
 
         if $<plot-phrase> {
             my $iterator = @iterators[0];
@@ -66,7 +72,8 @@ class DSL::English::IntegrationWorkflows::Actions::WL::System
     method command-integrate-short($/) {
         my $function = $<function-spec>.made;
         my $variable = self.inferred-variable($function);
-        make 'NIntegrate[' ~ self.wl-function($function) ~ ', ' ~ $variable ~ ']';
+        make self.integration-head($/) ~ '[' ~ self.wl-function($function)
+            ~ ', ' ~ $variable ~ ']';
     }
 
     method function-spec($/) {

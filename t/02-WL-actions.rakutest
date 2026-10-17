@@ -12,8 +12,8 @@ sub translate(Str:D $command --> Str:D) {
 }
 
 is translate('compute the symbolic integral of Sin[x]*x^2 over 0 to 10'),
-   'NIntegrate[Sin[x]&x^2, {x,0,10}]',
-   'bounded integration uses the inferred variable';
+   'Integrate[Sin[x]&x^2, {x,0,10}]',
+   'symbolic bounded integration uses Integrate';
 
 is translate('compute the numerical integral of Sin[x] for x over 0 to 10'),
    'NIntegrate[Sin[x], {x,0,10}]',
@@ -75,8 +75,12 @@ is translate('numerically integrate $\frac{1}{sqrt{x}}$ over the range [0,1] wit
    'LaTeX expressions and singularity/recursion controls are translated';
 
 is translate('do symbolic integration of $\frac{1}{sqrt{x}}$ over the range [0,1]'),
-   'NIntegrate[ToExpression["\\\\frac{1}{sqrt{x}}", TeXForm], {x,0,1}]',
+   'Integrate[ToExpression["\\\\frac{1}{sqrt{x}}", TeXForm], {x,0,1}]',
    'do symbolic integration accepts a LaTeX function specification';
+
+is translate('symbolically integrate x^2 over [0,1]'),
+   'Integrate[x^2, {x,0,1}]',
+   'symbolically integrate uses Integrate';
 
 is translate('integrate numerically exp(-(x^2 + y^2)) over the domain [-Inf, Inf] x [-Inf, Inf] using unit cube rescaling'),
    'NIntegrate[exp(-(x^2 + y^2)), {x,-Infinity,Infinity}, {y,-Infinity,Infinity}, Method -> "UnitCubeRescaling"]',
