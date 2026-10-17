@@ -44,31 +44,31 @@ role DSL::English::IntegrationWorkflows::Grammar::ComputationalIntegrationPhrase
     }
 
     token strategy { :i 'strategy'  | ([\w]+) <?{ is-fuzzy-match($0.Str, 'strategy', 2) }> }
-    token method-name-separator { [ \h+ | '_' | '-' ]+ }
+    token msep { [ \h+ | '_' | '-' ]+ }
 
     # Integration strategies
-    token adaptive-monte-carlo { :i 'AdaptiveMonteCarlo' | 'adaptive' <method-name-separator> 'monte' <method-name-separator> 'carlo' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivemontecarlo', 3) }> }
-    token adaptive-quasi-monte-carlo { :i 'AdaptiveQuasiMonteCarlo' | 'adaptive' <method-name-separator> 'quasi' <method-name-separator> 'monte' <method-name-separator> 'carlo' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivequasimontecarlo', 3) }> }
-    token double-exponential { :i 'DoubleExponential' | 'double' <method-name-separator> 'exponential' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'doubleexponential', 3) }> }
-    token global-adaptive { :i 'GlobalAdaptive' | 'global' <method-name-separator> 'adaptive' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'globaladaptive', 3) }> }
-    token local-adaptive { :i 'LocalAdaptive' | 'local' <method-name-separator> 'adaptive' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'localadaptive', 3) }> }
-    token monte-carlo { :i 'MonteCarlo' | 'monte' <method-name-separator> 'carlo' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlo', 3) }> }
-    token quasi-monte-carlo { :i 'QuasiMonteCarlo' | 'quasi' <method-name-separator> 'monte' <method-name-separator> 'carlo' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'quasimontecarlo', 3) }> }
+    token adaptive-monte-carlo { :i 'AdaptiveMonteCarlo' | 'adaptive' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivemontecarlo', 3) }> }
+    token adaptive-quasi-monte-carlo { :i 'AdaptiveQuasiMonteCarlo' | 'adaptive' <msep> 'quasi' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'adaptivequasimontecarlo', 3) }> }
+    token double-exponential { :i 'DoubleExponential' | 'double' <msep> 'exponential' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'doubleexponential', 3) }> }
+    token global-adaptive { :i 'GlobalAdaptive' | 'global' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'globaladaptive', 3) }> }
+    token local-adaptive { :i 'LocalAdaptive' | 'local' <msep> 'adaptive' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'localadaptive', 3) }> }
+    token monte-carlo { :i 'MonteCarlo' | 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlo', 3) }> }
+    token quasi-monte-carlo { :i 'QuasiMonteCarlo' | 'quasi' <msep> 'monte' <msep> 'carlo' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'quasimontecarlo', 3) }> }
 
     # Integration preprocessors
-    token even-odd-subdivision { :i 'EvenOddSubdivision' | 'even' <method-name-separator> 'odd' <method-name-separator> 'subdivision' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'evenoddsubdivision', 3) }> }
-    token symbolic-piecewise-subdivision { :i 'SymbolicPiecewiseSubdivision' | 'symbolic' <method-name-separator> 'piecewise' <method-name-separator> 'subdivision' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'symbolicpiecewisesubdivision', 3) }> }
-    token unit-cube-rescaling { :i 'UnitCubeRescaling' | 'unit' <method-name-separator> 'cube' <method-name-separator> 'rescaling' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'unitcuberescaling', 3) }> }
+    token even-odd-subdivision { :i 'EvenOddSubdivision' | 'even' <msep> 'odd' <msep> 'subdivision' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'evenoddsubdivision', 3) }> }
+    token symbolic-piecewise-subdivision { :i 'SymbolicPiecewiseSubdivision' | 'symbolic' <msep> 'piecewise' <msep> 'subdivision' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'symbolicpiecewisesubdivision', 3) }> }
+    token unit-cube-rescaling { :i 'UnitCubeRescaling' | 'unit' <msep> 'cube' <msep> 'rescaling' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'unitcuberescaling', 3) }> }
 
     # Integration rules
-    token cartesian-rule { :i 'CartesianRule' | 'cartesian' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'cartesianrule', 3) }> }
-    token clenshaw-curtis-rule { :i 'ClenshawCurtisRule' | 'clenshaw' <method-name-separator> 'curtis' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'clenshawcurtisrule', 3) }> }
-    token gauss-kronrod-rule { :i 'GaussKronrodRule' | 'gauss' <method-name-separator> 'kronrod' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'gausskronrodrule', 3) }> }
-    token lobatto-kronrod-rule { :i 'LobattoKronrodRule' | 'lobatto' <method-name-separator> 'kronrod' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'lobattokronrodrule', 3) }> }
-    token monte-carlo-rule { :i 'MonteCarloRule' | 'monte' <method-name-separator> 'carlo' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlorule', 3) }> }
-    token multidimensional-rule { :i 'MultidimensionalRule' | 'MultiDimensionalRule' | 'multidimensional' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'multidimensionalrule', 3) }> }
-    token newton-cotes-rule { :i 'NewtonCotesRule' | 'newton' <method-name-separator> 'cotes' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'newtoncotesrule', 3) }> }
-    token trapezoidal-rule { :i 'TrapezoidalRule' | 'trapezoidal' <method-name-separator> 'rule' | ([\w]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'trapezoidalrule', 3) }> }
+    token cartesian-rule { :i 'CartesianRule' | 'cartesian' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'cartesianrule', 3) }> }
+    token clenshaw-curtis-rule { :i 'ClenshawCurtisRule' | 'clenshaw' <msep> 'curtis' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'clenshawcurtisrule', 3) }> }
+    token gauss-kronrod-rule { :i 'GaussKronrodRule' | 'gauss' <msep> 'kronrod' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'gausskronrodrule', 3) }> }
+    token lobatto-kronrod-rule { :i 'LobattoKronrodRule' | 'lobatto' <msep> 'kronrod' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'lobattokronrodrule', 3) }> }
+    token monte-carlo-rule { :i 'MonteCarloRule' | 'monte' <msep> 'carlo' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'montecarlorule', 3) }> }
+    token multidimensional-rule { :i 'MultidimensionalRule' | 'MultiDimensionalRule' | 'multidimensional' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'multidimensionalrule', 3) }> }
+    token newton-cotes-rule { :i 'NewtonCotesRule' | 'newton' <msep> 'cotes' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'newtoncotesrule', 3) }> }
+    token trapezoidal-rule { :i 'TrapezoidalRule' | 'trapezoidal' <msep> 'rule' | ([\w | <msep>]+) <?{ is-fuzzy-match($0.Str.subst(/\W/):g, 'trapezoidalrule', 3) }> }
     rule precision-goal-option { 'precision' <goal-noun> <number-value> }
     rule accuracy-goal-option { 'accuracy' <goal-noun> <number-value> }
     rule max-recursion-option { <maximum> <recursion-noun> <integer-value> }
